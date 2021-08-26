@@ -10,7 +10,7 @@ from json2table import convert
 import json
 import logging
 
-from flaskr.search_food_items import FoodMenu
+from search_food_items import FoodMenu
 
 logger = logging.getLogger(__name__)
 

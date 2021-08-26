@@ -85,11 +85,82 @@ Its Taco Time!
 Sending Get Request To API With Parameters
 ```bash
 $ curl --request GET \
-  --url http://localhost:5001/home
+  --url 'http://localhost:5001/get_menu_items?item_type=food&keyword_search=burrito&names_only=false'
 ```
 Response
 ```bash
-Its Taco Time!
+{
+  "category": "success",
+  "data": [
+    "7-Layer Burrito",
+    "Bean Burrito",
+    "Beefy 5-Layer Burrito",
+    "Beefy Fritos® Burrito",
+    "Black Bean Burrito",
+    "Burrito Supreme® - Beef",
+    "Burrito Supreme® - Chicken",
+    "Burrito Supreme® - Steak",
+    "Cheesy Bean & Rice Burrito",
+    "Cheesy Burrito - Bacon",
+    "Cheesy Burrito - Bacon - Fresco Style",
+    "Cheesy Burrito - Sausage",
+    "Cheesy Burrito - Sausage - Fresco Style",
+    "Cheesy Burrito - Steak",
+    "Cheesy Burrito - Steak - Fresco Style",
+    "Cheesy Potato Burrito",
+    "Chili Cheese Burrito (regional)",
+    "Combo Burrito",
+    "Fresco Bean Burrito",
+    "Fresco Burrito Supreme® - Chicken",
+    "Fresco Burrito Supreme® - Steak",
+    "Grande Scrambler Burrito - Bacon",
+    "Grande Scrambler Burrito - Sausage",
+    "Grande Scrambler Burrito - Steak",
+    "Grilled Breakfast Burrito - Bacon",
+    "Grilled Breakfast Burrito - Fiesta Potato",
+    "Grilled Breakfast Burrito - Sausage",
+    "Power Menu Burrito - Chicken",
+    "Power Menu Burrito - Steak",
+    "Power Menu Burrito - Veggie",
+    "Shredded Chicken Burrito",
+    "Smothered Burrito - Beef",
+    "Smothered Burrito - Shredded Chicken",
+    "Smothered Burrito - Steak",
+    "XXL Grilled Stuft Burrito - Beef",
+    "XXL Grilled Stuft Burrito - Chicken",
+    "XXL Grilled Stuft Burrito - Steak"
+  ],
+  "status": 200
+}
+```
+
+Sending Get Request To API With Parameters
+```bash
+$ curl --request GET \
+  --url 'http://localhost:5001/get_item_by_health_indicator?item_type=food&keyword_search=taco&indicator=calories&='
+```
+
+Response
+```bash
+{
+  "category": "success",
+  "data": {
+    "Carbohydrates": 13,
+    "calories": 140,
+    "caloriesFromFat": 70,
+    "cholesterol": 15,
+    "cost": 1.19,
+    "dietaryFiber": 3,
+    "name": "Fresco Crunchy Taco - Beef",
+    "protein": 6,
+    "saturatedFat": 2,
+    "sodium": 300,
+    "sugars": 1,
+    "totalFat": 7,
+    "transFat": 0
+  },
+  "status": 200
+}
 ```
 
 
