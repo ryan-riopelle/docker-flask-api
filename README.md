@@ -1,76 +1,44 @@
 # Docker Flask API template 🐳
 
-<!-- Shields -->
-![Top language](https://img.shields.io/github/languages/top/RodolfoFerro/docker-flask-api?style=for-the-badge)
-![Code size](https://img.shields.io/github/languages/code-size/RodolfoFerro/docker-flask-api?style=for-the-badge)
-[![Last commit](https://img.shields.io/github/last-commit/RodolfoFerro/docker-flask-api?style=for-the-badge)](https://github.com/RodolfoFerro/docker-flask-api/commits/master)
-[![License](https://img.shields.io/github/license/RodolfoFerro/docker-flask-api?style=for-the-badge)](https://github.com/RodolfoFerro/docker-flask-api/blob/master/LICENSE)
-[![Twitter follow](https://img.shields.io/twitter/follow/FerroRodolfo?style=for-the-badge)](https://twitter.com/FerroRodolfo/)
-
 <!-- Project description -->
-This repository aims to be an easy to extend template for building a Python API using Flask and running it with only Python or using Docker.
-
+This repository aims to be an easy to extend template for building a Python API using Flask and running it with only Python or using Docker, Docker-Compose, and Makefile.
 
 ## Prerequisities
 
 Before you begin, ensure you have met the following requirements:
 
-#### For only-Docker usage:
+#### For Docker usage:
 * You have a _Windows/Linux/Mac_ machine with the latest version of [Docker](https://www.docker.com/) installed.
 
-#### For only-Python usage:
-* You have a _Windows/Linux/Mac_ machine running [Python 3.6+](https://www.python.org/).
-* You have installed the latest versions of [`pip`](https://pip.pypa.io/en/stable/installing/) and [`virtualenv`](https://virtualenv.pypa.io/en/stable/installation/) or `conda` ([Anaconda](https://www.anaconda.com/distribution/)).
-
-For general purposes, why not installing prerequisites for both cases?
-
-
-## Install/Run with only Python
-
-If you want to install the dependencies and work locally using only Python, you can simply follow this steps. If you want to directly work using Docker, jump to the "[Install/Run with Docker](https://github.com/RodolfoFerro/docker-flask-api#installrun-with-docker)" section.
-
-Clone the project repository:
+Version Check:
 ```bash
-git clone https://github.com/RodolfoFerro/docker-flask-api.git
-cd docker-flask-api
+docker -v
 ```
 
-To create and activate the virtual environment, follow these steps:
+#### For docker-compose
 
-Using `conda`:
+Install Steps:
 ```bash
-$ conda create -n docker-flask python=3.7
-
-# Activate the virtual environment:
-$ conda activate docker-flask
-
-# To deactivate:
-(docker-flask)$ conda deactivate
+sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-Using `virtualenv`:
+Version Check:
 ```bash
-# In this case I'm supposing that your latest python3 version is +3.6
-$ virtualenv docker-flask --python=python3
-
-# Activate the virtual environment:
-$ source docker-flask/bin/activate
-
-# To deactivate:
-(docker-flask)$ deactivate
+docker-compose -v
 ```
 
-To install the requirements using `pip`, once the virtual environment is active:
+#### For Makefile
+
+Install Steps For Mac if brew is already installed (google it for windows/linux):
 ```bash
-(docker-flask)$ pip install -r requirements.txt
+brew install make
 ```
 
-Finally, if you want to run the app locally, simply run:
+Version Check:
 ```bash
-$ python app.py
+make --version
 ```
-
-Now you should be able to test the API at <http://0.0.0.0:5000/>.
 
 ## Install/Run with Docker
 
@@ -78,54 +46,124 @@ If you want to install the dependencies and work using Docker, you can simply fo
 
 Clone the project repository:
 ```bash
-git clone https://github.com/RodolfoFerro/docker-flask-api.git
+git clone https://github.com/ryan-riopelle/docker-flask-api.git
 cd docker-flask-api
 ```
 
-To build the Docker image, simply run:
-
+Using `Makefile with Docker-Compose`:
 ```bash
-$ docker build -t docker-flask-api .
-```
+$ make startdevenv
+````
 
-To run the Docker image, run the following:
-```bash
-$ docker run -it -p 5000:5000 -v $(pwd):/app  docker-flask-api
-```
+Now you should be able to test the API at <http://localhost:5001/>.
 
-Now you should be able to test the API at <http://localhost:5000/>.
-
-To stop the Docker container:
+View docker containers:
 ```bash
 $ docker ps
-$ docker stop <container-id>
 ```
 
-## Contributing
+Login to docker containers:
+```bash
+$ docker exec -it <container_name or container_id> /bin/bash
+```
 
-To contribute to <project_name>, follow these steps:
+To stop the Docker containers:
+```bash
+$ make stopdevenv
+```
 
-1. Fork this repository.
-2. Create a branch: `git checkout -b <feature_branch_name>`.
-3. Make your changes and commit them: `git commit -m '<commit_message>'`
-4. Push to the original branch: `git push origin <project_name>/<location>`
-5. Create a Pull Request.
+Sending Test Request To API
+```bash
+$ curl --request GET \
+  --url http://localhost:5001/home
+```
+Response
+```
+Its Taco Time!
+```
 
-Additionally you can see the GitHub documentation on [creating a Pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+Sending Get Request To API With Parameters
+```bash
+$ curl --request GET \
+  --url 'http://localhost:5001/get_menu_items?item_type=food&keyword_search=burrito&names_only=false'
+```
+Response
+```bash
+{
+  "category": "success",
+  "data": [
+    "7-Layer Burrito",
+    "Bean Burrito",
+    "Beefy 5-Layer Burrito",
+    "Beefy Fritos® Burrito",
+    "Black Bean Burrito",
+    "Burrito Supreme® - Beef",
+    "Burrito Supreme® - Chicken",
+    "Burrito Supreme® - Steak",
+    "Cheesy Bean & Rice Burrito",
+    "Cheesy Burrito - Bacon",
+    "Cheesy Burrito - Bacon - Fresco Style",
+    "Cheesy Burrito - Sausage",
+    "Cheesy Burrito - Sausage - Fresco Style",
+    "Cheesy Burrito - Steak",
+    "Cheesy Burrito - Steak - Fresco Style",
+    "Cheesy Potato Burrito",
+    "Chili Cheese Burrito (regional)",
+    "Combo Burrito",
+    "Fresco Bean Burrito",
+    "Fresco Burrito Supreme® - Chicken",
+    "Fresco Burrito Supreme® - Steak",
+    "Grande Scrambler Burrito - Bacon",
+    "Grande Scrambler Burrito - Sausage",
+    "Grande Scrambler Burrito - Steak",
+    "Grilled Breakfast Burrito - Bacon",
+    "Grilled Breakfast Burrito - Fiesta Potato",
+    "Grilled Breakfast Burrito - Sausage",
+    "Power Menu Burrito - Chicken",
+    "Power Menu Burrito - Steak",
+    "Power Menu Burrito - Veggie",
+    "Shredded Chicken Burrito",
+    "Smothered Burrito - Beef",
+    "Smothered Burrito - Shredded Chicken",
+    "Smothered Burrito - Steak",
+    "XXL Grilled Stuft Burrito - Beef",
+    "XXL Grilled Stuft Burrito - Chicken",
+    "XXL Grilled Stuft Burrito - Steak"
+  ],
+  "status": 200
+}
+```
+
+Sending Get Request To API With Parameters
+```bash
+$ curl --request GET \
+  --url 'http://localhost:5001/get_item_by_health_indicator?item_type=food&keyword_search=taco&indicator=calories&='
+```
+
+Response
+```bash
+{
+  "category": "success",
+  "data": {
+    "Carbohydrates": 13,
+    "calories": 140,
+    "caloriesFromFat": 70,
+    "cholesterol": 15,
+    "cost": 1.19,
+    "dietaryFiber": 3,
+    "name": "Fresco Crunchy Taco - Beef",
+    "protein": 6,
+    "saturatedFat": 2,
+    "sodium": 300,
+    "sugars": 1,
+    "totalFat": 7,
+    "transFat": 0
+  },
+  "status": 200
+}
+```
 
 
-<!-- ## Contributors
 
-Thanks to the following people who have contributed to this project:
-
-* @RodolfoFerro 📖💻 -->
-
-
-## Contact
-
-If you want to contact me you can reach me at <rodolfoferroperez@gmail.com>. There, or through any other of my social profiles your can find at: <https://rodolfoferro.glitch.me/>
-
-
-## License
-
-This project uses an [MIT License](https://github.com/RodolfoFerro/docker-flask-api/blob/master/LICENSE).
+Got the data from 
+https://github.com/jontonsoup4/taco-bell-as-a-service
