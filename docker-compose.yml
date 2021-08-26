@@ -1,10 +1,10 @@
 version: '3'  # version of compose format
 
 services:
-  observatory-service:
-    build: ./observatory  # path is relative to docker-compose.yml location
+  taco-service:
+    build: flaskr  # path is relative to docker-compose.yml location
     volumes:
-      - ./observatory:/usr/src/app # mount point
+      - ./flaskr:/usr/src/flaskr # mount point
     ports:
       - 5001:80  # host:container
 
@@ -15,5 +15,5 @@ services:
     ports:
       - 5000:80  # host:container
     depends_on:
-      - observatory-service  # website is not going to work
+      - taco-service  # website is not going to work
                              # unless observatory-service is running

@@ -7,10 +7,10 @@
         <h1>Welcome to my observatory</h1>
         <ul>
             <?php
-            $json = file_get_contents('http://observatory-service/');
+            $json = file_get_contents('http://taco-service/');
             $obj = json_decode($json);
-            $galaxies = $obj->Galaxies;
-            foreach ($galaxies as $galaxy) {
+            $tacos = $obj->Tacos;
+            foreach ($tacos as $taco) {
                 echo "<li>$galaxy</li>";
             }
             ?>

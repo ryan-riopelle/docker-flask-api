@@ -5,5 +5,8 @@ FROM python:3-onbuild
 # python:3-onbuild expects the source in /usr/src/app
 COPY .. /usr/src/app
 
+ENV PYTHONPATH=/usr/src/app
+WORKDIR /usr/src/app
+
 # Commands in a list
 CMD ["python", "api.py"]
