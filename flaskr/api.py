@@ -55,28 +55,28 @@ def get_menu_items():
     food_menu = FoodMenu(item_type)
     food_items = food_menu.search_items(keyword_search, names_only)
     return jsonify(data=food_items, category="success", status=200)
-#
-# @app.route('/get_item_by_health_indicator', methods=['GET'])
-# def get_item_by_health_indicator():
-#     start = timer()
-#     # retrieve and validate required parameters from request
-#     item_type = request.args.get('item_type')
-#     keyword_search = request.args.get('keyword_search')
-#     indicator = request.args.get('indicator')
-#     high_low = request.args.get('high_low', default='low')
-#     if not item_type:
-#         abort(make_response(jsonify(status='error',
-#                                     message='Missing item_type'), 400))
-#     if not keyword_search:
-#         abort(make_response(jsonify(status='error',
-#                                     message='Missing keyword_search'), 400))
-#     if not indicator:
-#         abort(make_response(jsonify(status='names_only: True or False',
-#                                     message='Missing site_id'), 400))
-#
-#     food_menu = FoodMenu(item_type)
-#     food_items = food_menu.healthy_item(keyword_search, indicator, high_low)
-#     return jsonify(data=food_items, category="success", status=200)
+
+@app.route('/get_item_by_health_indicator', methods=['GET'])
+def get_item_by_health_indicator():
+    start = timer()
+    # retrieve and validate required parameters from request
+    item_type = request.args.get('item_type')
+    keyword_search = request.args.get('keyword_search')
+    indicator = request.args.get('indicator')
+    high_low = request.args.get('high_low', default='low')
+    if not item_type:
+        abort(make_response(jsonify(status='error',
+                                    message='Missing item_type'), 400))
+    if not keyword_search:
+        abort(make_response(jsonify(status='error',
+                                    message='Missing keyword_search'), 400))
+    if not indicator:
+        abort(make_response(jsonify(status='names_only: True or False',
+                                    message='Missing site_id'), 400))
+
+    food_menu = FoodMenu(item_type)
+    food_items = food_menu.healthy_item(keyword_search, indicator, high_low)
+    return jsonify(data=food_items, category="success", status=200)
 
 # Run the application
 if __name__ == '__main__':

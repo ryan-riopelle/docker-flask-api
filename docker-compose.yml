@@ -2,9 +2,9 @@ version: '3'  # version of compose format
 
 services:
   taco-service:
-    build: flaskr  # path is relative to docker-compose.yml location
+    build: ./flaskr  # path is relative to docker-compose.yml location
     volumes:
-      - ./flaskr:/usr/src/flaskr # mount point
+      - ./flaskr:/usr/src/app # mount point
     ports:
       - 5001:80  # host:container
 

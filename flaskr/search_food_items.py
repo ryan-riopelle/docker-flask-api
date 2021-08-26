@@ -6,9 +6,10 @@ logger = logging.getLogger(__name__)
 
 # typically this data would come from settings or config file
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ALL_FOOD_MENU = PROJECT_ROOT + '/menu/all.json'
-FOOD_MENU = PROJECT_ROOT + '/menu/food.json'
-DRINK_MENU = PROJECT_ROOT + '/menu/drinks.json'
+print(f"PROJECT_ROOT: {PROJECT_ROOT}")
+ALL_FOOD_MENU = PROJECT_ROOT + '/flaskr/menu/all.json'
+FOOD_MENU = PROJECT_ROOT + '/flaskr/menu/food.json'
+DRINK_MENU = PROJECT_ROOT + '/flaskr/menu/drinks.json'
 
 def get_food_menu(item_type):
 
