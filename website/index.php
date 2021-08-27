@@ -4,7 +4,7 @@
     </head>
 
     <body>
-        <h1>Welcome to my observatory</h1>
+        <h1>Welcome to my Taco Shop</h1>
         <ul>
             <?php
             $json = file_get_contents('http://taco-service/');
